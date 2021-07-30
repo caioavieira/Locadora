@@ -1,11 +1,11 @@
-﻿using Locadora.WebApp.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Locadora.WebApp.Models;
 
 namespace Locadora.WebApp.Controllers
 {
