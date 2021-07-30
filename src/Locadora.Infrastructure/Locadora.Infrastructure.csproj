@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\Locadora.Infrastructure\Locadora.Infrastructure.csproj" />
+    <ProjectReference Include="..\Locadora.Domain\Locadora.Domain.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
