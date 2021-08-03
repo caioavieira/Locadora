@@ -23,7 +23,5 @@ namespace Locadora.Domain.Entidades
             Valor = valor;
             Quantidade = quantidade;
         }
-
-
     }
 }
