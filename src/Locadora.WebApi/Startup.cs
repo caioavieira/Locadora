@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Locadora.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 
 namespace Locadora.WebApi
 {
@@ -28,10 +30,8 @@ namespace Locadora.WebApi
         {
 
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Locadora.WebApi", Version = "v1" });
-            });
+            services.AddDbContext<LocadoraContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("LocadoraContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,8 +40,6 @@ namespace Locadora.WebApi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Locadora.WebApi v1"));
             }
 
             app.UseHttpsRedirection();
