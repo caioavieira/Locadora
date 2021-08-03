@@ -5,6 +5,8 @@ namespace Locadora.Domain.Entidades
     public class Aluguel
     {
         public Guid Id { get; set; }
+        public Usuario Usuario { get; set; }
+        public Produto Produto { get; set; }
         public DateTime DataAluguel { get; set; }
         public DateTime DataEntrega { get; set; }
         public DateTime DataReserva { get; set; }
