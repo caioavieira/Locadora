@@ -69,3 +69,30 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+/* _Layout
+-------------------------------------------------- */
+.buttons-size {
+    font-size: 2em;
+}
+
+.img-home {
+    filter: grayscale(100%);
+    border-radius: 10px 10px;
+    width: 250px;
+}
+
+.img-home:hover {
+    filter: grayscale(0);
+    transition: filter 0.8s ease;
+    border-radius: 10px 10px;
+    width: 250px;
+}
+
+.text-form {
+    font-weight: bold;
+}
+
+.text-title {
+    font-weight: 700;
+}
