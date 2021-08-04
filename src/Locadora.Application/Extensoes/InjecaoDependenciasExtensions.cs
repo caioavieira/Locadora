@@ -17,6 +17,8 @@ namespace Locadora.Application.Extensoes
 
         public static void AddRepositorios(this IServiceCollection servicos)
         {
+            servicos.AddScoped<IAluguelRepository, AluguelRepository>();
+            servicos.AddScoped<IProdutoRepository, ProdutoRepository>();
             servicos.AddScoped<IUsuarioRepository, UsuarioRepository>();
         }
 
@@ -25,8 +27,17 @@ namespace Locadora.Application.Extensoes
             servicos.AddScoped((serviceProvider) => 
             {
                 var locadoraContext = serviceProvider.GetRequiredService<LocadoraContext>();
-                var usuarioRepository = serviceProvider.GetRequiredService<IUsuarioRepository>();
-                return new CadastrarUsuarioHandler(locadoraContext, usuarioRepository);
+                var repositorioUsuario = serviceProvider.GetRequiredService<IUsuarioRepository>();
+                return new CadastrarUsuarioHandler(locadoraContext, repositorioUsuario);
+            });
+
+            servicos.AddScoped((serviceProvider) => 
+            {
+                var locadoraContext = serviceProvider.GetRequiredService<LocadoraContext>();
+                var repositorioAluguel = serviceProvider.GetRequiredService<IAluguelRepository>();
+                var repositorioProduto = serviceProvider.GetRequiredService<IProdutoRepository>();
+                var repositorioUsuario = serviceProvider.GetRequiredService<IUsuarioRepository>();
+                return new SolicitarAluguelHandler(locadoraContext, repositorioAluguel, repositorioProduto, repositorioUsuario);
             });
         }
     }

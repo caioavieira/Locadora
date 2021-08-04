@@ -37,6 +37,11 @@ namespace Locadora.Domain.Entidades
             throw new NotImplementedException();
         }
 
+        public bool PrazoValido()
+        {
+            return Prazo >= 2;
+        }
+
         public bool PrazoExpirado()
         {
             throw new NotImplementedException();

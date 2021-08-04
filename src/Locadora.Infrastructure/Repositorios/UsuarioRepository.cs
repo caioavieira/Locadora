@@ -36,10 +36,9 @@ namespace Locadora.Infrastructure.Repositorios
             _locadoraContext.Usuarios.Remove(usuario);
         }
 
-        public IQueryable<Usuario> Listar(string nome, string documento, TipoUsuario? tipo, string email, string senha, string telefone, int? ddd, bool? debito, Endereco? endereco)
+        public IQueryable<Usuario> Listar(string nome, string documento, TipoUsuario? tipo, string email, string senha, string telefone, int? ddd, bool? debito)
         {
-            return _locadoraContext.Usuarios.Where(w => 
-                                                        (string.IsNullOrWhiteSpace(nome) || w.Nome.ToLower().Contains(nome.ToLower())));
+            return _locadoraContext.Usuarios.Where(w => (string.IsNullOrWhiteSpace(nome) || w.Nome.ToLower().Contains(nome.ToLower())));
         }
     }
 }

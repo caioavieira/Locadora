@@ -36,7 +36,7 @@ namespace Locadora.WebApi.Controllers
                 _logger.LogError(ex.Message, ex);
                 return BadRequest(ex.Message + " inválido(a)");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError(ex.Message, ex);
                 return StatusCode(500, "Erro ao executar ação");
