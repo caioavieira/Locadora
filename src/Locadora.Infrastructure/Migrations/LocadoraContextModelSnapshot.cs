@@ -13,7 +13,6 @@ namespace Locadora.Infrastructure.Migrations
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
-#pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.8")
@@ -179,7 +178,6 @@ namespace Locadora.Infrastructure.Migrations
 
                     b.Navigation("Endereco");
                 });
-#pragma warning restore 612, 618
         }
     }
 }
