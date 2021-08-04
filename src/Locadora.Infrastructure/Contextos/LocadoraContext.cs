@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Locadora.Domain.Entidades;
 
 
-namespace Locadora.Infrastructure
+namespace Locadora.Infrastructure.Contextos
 {
     public class LocadoraContext : DbContext
     {
