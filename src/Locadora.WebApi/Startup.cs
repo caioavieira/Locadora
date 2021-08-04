@@ -30,6 +30,8 @@ namespace Locadora.WebApi
 
             services.AddControllers();
             services.AddContexto(Configuration.GetConnectionString("LocadoraContext"));
+            services.AddRepositorios();
+            services.AddHandlers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -14,7 +14,7 @@ namespace Locadora.Infrastructure.Fabricas
         public LocadoraContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<LocadoraContext>();
-            optionsBuilder.UseSqlServer("Data Source=localhost,1433;Initial Catalog=locadora;User Id=SA;Password=abc,123456");
+            optionsBuilder.UseSqlServer("Data Source=localhost,1433;Initial Catalog=LocadoraDB;User Id=SA;Password=abc,12345678");
 
             return new LocadoraContext(optionsBuilder.Options);
         }

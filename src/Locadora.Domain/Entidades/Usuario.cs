@@ -1,21 +1,27 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using Locadora.Common.Enums;
+using System;
+using System.Collections.Generic;
 
 namespace Locadora.Domain.Entidades
 {
-    public class Usuario
+    public abstract class Usuario
     {
         public Guid Id { get; set; }
         public string Nome { get; set; }
         public string Documento { get; set; }
-        public int Tipo { get; set; }
+        public TipoUsuario Tipo { get; set; }
         public string Email { get; set; }
         public string Senha { get; set; }
-        public int Telefone { get; set; }
+        public string Telefone { get; set; }
         public int DDD { get; set; }
+        public bool Debito { get; set; }
         public Endereco Endereco { get; set; }
 
-        public Usuario(Guid id, string nome, string documento, int tipo, string email, string senha, int telefone, int ddd, Endereco endereco)
+        public Usuario()
+        {            
+        }
+
+        public Usuario(Guid id, string nome, string documento, TipoUsuario tipo, string email, string senha, string telefone, int ddd, bool debito, Endereco endereco)
         {
             Id = id;
             Nome = nome;
@@ -25,7 +31,28 @@ namespace Locadora.Domain.Entidades
             Senha = senha;
             Telefone = telefone;
             DDD = ddd;
+            Debito = debito;
             Endereco = endereco;
+        }
+
+        public bool DocumentoValido()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool TelefoneValido()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool EmailValido()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Aluguel SolicitarAluguel(IEnumerable<Produto> produtos)
+        {
+            throw new NotImplementedException();
         }
     }
 }

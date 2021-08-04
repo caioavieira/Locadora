@@ -12,9 +12,12 @@ namespace Locadora.Domain.Entidades
         public string Cep { get; set; }
         public int Numero { get; set; }
         public string Cidade { get; set; }
-        public string Estado { get; set;}
 
-        public Endereco(Guid id, string logradouro, string bairro, string uf, string complemento, string cep, int numero, string cidade, string estado)
+        public Endereco()
+        {
+        }
+
+        public Endereco(Guid id, string logradouro, string bairro, string uf, string complemento, string cep, int numero, string cidade)
         {
             Id = id;
             Logradouro = logradouro;
@@ -24,7 +27,11 @@ namespace Locadora.Domain.Entidades
             Cep = cep;
             Numero = numero;
             Cidade = cidade;
-            Estado = estado;
+        }
+
+        public bool CepValido()
+        {
+            throw new NotImplementedException();
         }
     }
 }
