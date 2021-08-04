@@ -14,17 +14,17 @@ namespace Locadora.Domain.Entidades
         public string Cidade { get; set; }
         public string Estado { get; set;}
 
-        // public Endereco(Guid id, string logradouro, string bairro, string uf, string complemento, string cep, int numero, string cidade, string estado)
-        // {
-        //     Id = id;
-        //     Logradouro = logradouro;
-        //     Bairro = bairro;
-        //     Uf = uf;
-        //     Complemento = complemento;
-        //     Cep = cep;
-        //     Numero = numero;
-        //     Cidade = cidade;
-        //     Estado = estado;
-        // }
+        public Endereco(Guid id, string logradouro, string bairro, string uf, string complemento, string cep, int numero, string cidade, string estado)
+        {
+            Id = id;
+            Logradouro = logradouro;
+            Bairro = bairro;
+            Uf = uf;
+            Complemento = complemento;
+            Cep = cep;
+            Numero = numero;
+            Cidade = cidade;
+            Estado = estado;
+        }
     }
 }

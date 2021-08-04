@@ -18,8 +18,7 @@ namespace Locadora.Infrastructure
 
         public LocadoraContext(DbContextOptions<LocadoraContext> options)
             : base(options)
-        {
-        
+        {        
         }
     }
 }

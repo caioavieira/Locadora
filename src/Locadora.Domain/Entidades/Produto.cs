@@ -14,14 +14,15 @@ namespace Locadora.Domain.Entidades
         public int Categoria { get; set; }
         public decimal Valor { get; set; }
         public int Quantidade { get; set; }
-        // public Produto(Guid id, int midia, string titulo, int categoria, decimal valor, int quantidade)
-        // {
-        //     Id = id;
-        //     Midia = midia;
-        //     Titulo = titulo;
-        //     Categoria = categoria;
-        //     Valor = valor;
-        //     Quantidade = quantidade;
-        // }
+
+        public Produto(Guid id, int midia, string titulo, int categoria, decimal valor, int quantidade)
+        {
+            Id = id;
+            Midia = midia;
+            Titulo = titulo;
+            Categoria = categoria;
+            Valor = valor;
+            Quantidade = quantidade;
+        }
     }
 }

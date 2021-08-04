@@ -5,28 +5,41 @@ namespace Locadora.Domain.Entidades
     public class Aluguel
     {
         public Guid Id { get; set; }
-        public Usuario Usuario { get; set; }
-        public Produto Produto { get; set; }
         public DateTime DataAluguel { get; set; }
         public DateTime DataEntrega { get; set; }
         public DateTime DataReserva { get; set; }
-        public Decimal Valor { get; set; }
+        public decimal Valor { get; set; }
         public int Status { get; set; }
-        public int prazo { get; set; }
+        public int Prazo { get; set; }
+        public Usuario Usuario { get; set; }
+        public Produto Produto { get; set; }
 
-        // public Decimal CalcularValor()
-        // {
-        //     return 1.5E6m;
-        // }
+        public Aluguel(Guid id, DateTime dataAluguel, DateTime dataEntrega, DateTime dataReserva, decimal valor, int status, int prazo, Usuario usuario, Produto produto)
+        {
+            Id = id;
+            DataAluguel = dataAluguel;
+            DataEntrega = dataEntrega;
+            DataReserva = dataReserva;
+            Valor = valor;
+            Status = status;
+            Prazo = prazo;
+            Usuario = usuario;
+            Produto = produto;
+        }
 
-        // public bool PrazoExpirado()
-        // {
-        //     return true;
-        // }
+        public Decimal CalcularValor()
+        {
+            throw new NotImplementedException();
+        }
 
-        // public bool SolicitacaoConfirmada()
-        // {
-        //     return true;
-        // }
+        public bool PrazoExpirado()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool SolicitacaoConfirmada()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
