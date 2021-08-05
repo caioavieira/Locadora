@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 
 namespace Locadora.WebApi
 {
@@ -28,7 +29,7 @@ namespace Locadora.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();;
             services.AddContexto(Configuration.GetConnectionString("LocadoraContext"));
             services.AddRepositorios();
             services.AddHandlers();

@@ -1,5 +1,6 @@
 ﻿using Locadora.Common.Enums;
 using System;
+using System.Collections.Generic;
 
 namespace Locadora.Domain.Entidades
 {

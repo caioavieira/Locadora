@@ -17,6 +17,7 @@ namespace Locadora.WebApi.Controllers
     {
         private readonly ILogger<ProdutoController> _logger;
         private readonly ListarProdutosHandler _listarProdutosHandler;
+        private readonly CadastrarProdutoHandler _cadastrarProdutoHandler;
 
         public ProdutoController(ILogger<ProdutoController> logger,
                                     ListarProdutosHandler listarProdutosHandler)
@@ -37,6 +38,26 @@ namespace Locadora.WebApi.Controllers
             {
                 _logger.LogError(ex.Message, ex);
                 return StatusCode(500, "Erro ao executar ação");
+            }
+        }
+
+        [HttpPost]
+        public IActionResult CriarProduto(ProdutoDto produtoDto)
+        {
+            try
+            {
+                var id = _cadastrarProdutoHandler.Criar(produtoDto);
+                return CreatedAtAction(nameof(CriarProduto), id);
+            }
+            catch (ArgumentException ex)
+            {
+                _logger.LogError(ex.Message, ex);
+                return BadRequest(ex.Message + " inválido(a)");
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex.Message, ex);
+                return StatusCode(500, ex);
             }
         }
     }
