@@ -22,7 +22,7 @@ namespace Locadora.Application.Handlers
         public Guid Criar(ProdutoDto produtoDto)
         {
             var produto = new Produto(Guid.NewGuid(), produtoDto.Midia, produtoDto.Titulo,produtoDto.Categoria,
-            produtoDto.Tipo, produtoDto.Valor, produtoDto.Quantidade,);
+            produtoDto.Tipo, produtoDto.Valor, produtoDto.Quantidade);
    
                       
             using (var transacao = new Transacao(_locadoraContext))
