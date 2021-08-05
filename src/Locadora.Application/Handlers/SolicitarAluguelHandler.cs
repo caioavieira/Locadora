@@ -31,17 +31,18 @@ namespace Locadora.Application.Handlers
 
         public Guid Solicitar(AluguelDto aluguelDto)
         {
-            var produtos = new List<Produto>();
-            var usuario = _repositorioUsuario.Obter(aluguelDto.Usuario.Id);
-
-            if (usuario == null)
+            if (aluguelDto.Usuario == null)
                 throw new ArgumentException(nameof(aluguelDto.Usuario));
 
             if (aluguelDto.Produtos.Count() == 0)
                 throw new ArgumentException(nameof(aluguelDto.Produtos));
+            
+            var usuario = _repositorioUsuario.Obter(aluguelDto.Usuario.Id);
 
             if (usuario.Debito)
                 throw new UsuarioComDebitoPendenteException(usuario.Nome);
+            
+            var produtos = new List<Produto>();
 
             foreach (var produtoDto in aluguelDto.Produtos)
             {

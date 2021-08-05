@@ -37,7 +37,7 @@ namespace Locadora.WebApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> IndexAsync([FromBody] AluguelDto aluguelDto)
+        public async Task<IActionResult> IndexAsync([FromForm] AluguelDto aluguelDto)
         {
             var httpClient = _httpClientFactory.CreateClient();
             var response = await httpClient.PostAsJsonAsync(_configuration.GetValue<string>("AppSettings:LocadoraApiUrl") + "/api/Aluguel", aluguelDto);
