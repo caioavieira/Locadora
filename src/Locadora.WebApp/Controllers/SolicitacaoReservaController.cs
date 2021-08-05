@@ -10,18 +10,24 @@ using Microsoft.Extensions.Configuration;
 using System.Net.Http;
 using Locadora.Application.Dtos;
 using System.Net.Http.Json;
+using System.Text;
+using System.Text.Json;
+using RabbitMQ.Client;
 
 namespace Locadora.WebApp.Controllers
 {
     public class SolicitacaoReservaController : Controller
     {
         private readonly IConfiguration _configuration;
+        private readonly IConnection _rabbitConnection;
         private readonly IHttpClientFactory _httpClientFactory;
 
         public SolicitacaoReservaController(IConfiguration configuration,
+                                            IConnection rabbitConnection,
                                             IHttpClientFactory httpClientFactory)
         {
             _configuration = configuration;
+            _rabbitConnection = rabbitConnection;
             _httpClientFactory = httpClientFactory;
         }
 
@@ -37,15 +43,27 @@ namespace Locadora.WebApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> IndexAsync([FromForm] AluguelDto aluguelDto)
+        public IActionResult Index([FromForm] AluguelDto aluguelDto)
         {
-            var httpClient = _httpClientFactory.CreateClient();
-            var response = await httpClient.PostAsJsonAsync(_configuration.GetValue<string>("AppSettings:LocadoraApiUrl") + "/api/Aluguel", aluguelDto);
+            using (var canal = _rabbitConnection.CreateModel())
+            {
+                canal.QueueDeclare(queue: "qu.solicitacao.aluguel",
+                                    durable: false,
+                                    exclusive: false,
+                                    autoDelete: false,
+                                    arguments: null);
 
-            if (!response.IsSuccessStatusCode)
-                throw new Exception(response.ReasonPhrase);
+               
+                string mensagem = JsonSerializer.Serialize(aluguelDto);
+                var corpo = Encoding.UTF8.GetBytes(mensagem);
 
-            return RedirectToAction(nameof(Index), nameof(HomeController));
+                canal.BasicPublish(exchange: string.Empty,
+                                    routingKey: "qu.solicitacao.aluguel",
+                                    basicProperties: null,
+                                    body: corpo);
+            }
+
+            return RedirectToAction(nameof(Index), "Home");
         }
     }
 }
