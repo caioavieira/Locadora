@@ -80,7 +80,8 @@ namespace Locadora.Infrastructure.Migrations
                 name: "Produtos",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Midia = table.Column<int>(type: "int", nullable: false),
                     Titulo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Categoria = table.Column<int>(type: "int", nullable: false),

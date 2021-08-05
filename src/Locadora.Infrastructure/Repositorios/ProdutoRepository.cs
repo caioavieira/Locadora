@@ -3,6 +3,7 @@ using Locadora.Domain.Entidades;
 using Locadora.Domain.Interfaces;
 using Locadora.Infrastructure.Contextos;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Locadora.Infrastructure.Repositorios
@@ -36,9 +37,9 @@ namespace Locadora.Infrastructure.Repositorios
             _locadoraContext.Produtos.Remove(produto);
         }
 
-        public IQueryable<Produto> Listar(MidiaProduto? midia, string titulo, CategoriaProduto? categoria, TipoProduto? tipo, decimal? valor, int? quantidade)
+        public IQueryable<Produto> Listar(MidiaProduto midia, string titulo, CategoriaProduto categoria, TipoProduto tipo, decimal valor, int quantidade)
         {
-            return _locadoraContext.Produtos.Where(w => (!midia.HasValue || w.Midia == midia.Value));
+            return _locadoraContext.Produtos.Where(w => (string.IsNullOrWhiteSpace(titulo) || w.Titulo.ToLower().Contains(titulo.ToLower())));
         }
     }
 }

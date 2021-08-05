@@ -28,7 +28,7 @@ namespace Locadora.WebApp
             services.AddHttpClient();
             services.AddSingleton<IConnection>(o =>
             {
-                var fabrica = new ConnectionFactory() { HostName = "192.168.5.59", UserName = "guest", Password = "guest" };
+                var fabrica = new ConnectionFactory() { HostName = "192.168.100.100", UserName = "guest", Password = "guest" };
                 return fabrica.CreateConnection();
             });
         }

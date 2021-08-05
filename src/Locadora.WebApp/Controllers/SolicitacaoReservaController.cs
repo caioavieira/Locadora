@@ -53,7 +53,7 @@ namespace Locadora.WebApp.Controllers
                                     autoDelete: false,
                                     arguments: null);
 
-               
+
                 string mensagem = JsonSerializer.Serialize(aluguelDto);
                 var corpo = Encoding.UTF8.GetBytes(mensagem);
 

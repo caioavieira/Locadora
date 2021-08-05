@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Locadora.Infrastructure.Migrations
 {
     [DbContext(typeof(LocadoraContext))]
-    [Migration("20210805131150_FirstMigration")]
+    [Migration("20210805163708_FirstMigration")]
     partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -89,9 +89,10 @@ namespace Locadora.Infrastructure.Migrations
 
             modelBuilder.Entity("Locadora.Domain.Entidades.Produto", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<Guid?>("AluguelId")
                         .HasColumnType("uniqueidentifier");

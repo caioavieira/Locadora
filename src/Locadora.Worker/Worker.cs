@@ -43,6 +43,10 @@ namespace Locadora.Worker
                     var mensagem = Encoding.UTF8.GetString(corpo);
                     var aluguelDto = JsonSerializer.Deserialize<AluguelDto>(mensagem);
 
+                    aluguelDto.Usuario = new UsuarioDto(){Id = new Guid("a65d8f92-35d4-4647-94d7-27615a464c18")}; 
+                    var produtos = new List<ProdutoDto>();
+                    produtos.Add(new ProdutoDto(){Id = 4});
+                    aluguelDto.Produtos = produtos;
                     var httpClient = _httpClientFactory.CreateClient();
                     var response = await httpClient.PostAsJsonAsync(_configuration.GetValue<string>("AppSettings:LocadoraApiUrl") + "/api/Aluguel", aluguelDto);        
 

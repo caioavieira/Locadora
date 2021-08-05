@@ -39,6 +39,9 @@ namespace Locadora.Application.Handlers
             
             var usuario = _repositorioUsuario.Obter(aluguelDto.Usuario.Id);
 
+            if (usuario == null)
+                throw new ArgumentException(nameof(aluguelDto.Usuario));
+
             if (usuario.Debito)
                 throw new UsuarioComDebitoPendenteException(usuario.Nome);
             
@@ -48,7 +51,7 @@ namespace Locadora.Application.Handlers
             {
                 var produto = _repositorioProduto.Obter(produtoDto.Id);
 
-                if (usuario == null)
+                if (produto == null)
                     throw new ArgumentException(nameof(produtoDto));
 
                 if (!produto.PermitidoAluguel())
