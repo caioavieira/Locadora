@@ -14,9 +14,21 @@ namespace Locadora.Domain.Entidades
         {
         }
 
-        public void RealizarBaixa(Aluguel aluguel)
+        public Aluguel RealizarBaixa(Aluguel aluguel)
         {
-            throw new NotImplementedException();
+            if (!aluguel.SolicitacaoConfirmada())
+                throw new Exception();
+
+            aluguel.CalcularValor();
+            aluguel.DataEntrega = DateTime.Today;
+            aluguel.Status = StatusAluguel.BaixaLocacao;
+
+            foreach (var produto in aluguel.Produtos)
+            {
+                produto.Quantidade++;
+            }
+
+            return aluguel;
         }
     }
 }

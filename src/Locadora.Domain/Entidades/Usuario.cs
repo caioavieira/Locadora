@@ -1,6 +1,7 @@
 ﻿using Locadora.Common.Enums;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace Locadora.Domain.Entidades
 {
@@ -37,17 +38,21 @@ namespace Locadora.Domain.Entidades
 
         public bool DocumentoValido()
         {
-            throw new NotImplementedException();
+            var rgxCpf = new Regex(@"^\d{3}\.\d{3}\.\d{3}-\d{2}$");
+            var rgxCnpj = new Regex(@"(^(\d{2}.\d{3}.\d{3}/\d{4}-\d{2})|(\d{14})$)");
+            return rgxCpf.IsMatch(Documento) || rgxCnpj.IsMatch(Documento);
         }
 
         public bool TelefoneValido()
         {
-            throw new NotImplementedException();
+            var rgx = new Regex(@"^(?:[2-8]|9[1-9])[0-9]{3}\-[0-9]{4}$");
+            return rgx.IsMatch(Telefone);
         }
 
         public bool EmailValido()
         {
-            throw new NotImplementedException();
+            var rgx = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            return rgx.IsMatch(Email);
         }
 
         public Aluguel SolicitarAluguel(IEnumerable<Produto> produtos)

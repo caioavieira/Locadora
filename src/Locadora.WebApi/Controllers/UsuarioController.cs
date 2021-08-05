@@ -15,12 +15,15 @@ namespace Locadora.WebApi.Controllers
     public class UsuarioController : ControllerBase
     {
         private readonly ILogger<UsuarioController> _logger;
+        private readonly ListarUsuariosHandler _listarUsuariosHandler;
         private readonly CadastrarUsuarioHandler _cadastrarUsuarioHandler;
 
         public UsuarioController(ILogger<UsuarioController> logger,
+                                    ListarUsuariosHandler listarUsuariosHandler,
                                     CadastrarUsuarioHandler cadastrarUsuarioHandler)
         {
             _logger = logger;
+            _listarUsuariosHandler = listarUsuariosHandler;
             _cadastrarUsuarioHandler = cadastrarUsuarioHandler;
         }
 
@@ -45,11 +48,11 @@ namespace Locadora.WebApi.Controllers
         }
 
         [HttpGet]
-        public IActionResult ListarUsuario([FromQuery] UsuarioDto usuarioDto)
+        public IActionResult ListarUsuarios([FromQuery] UsuarioDto usuarioDto)
         {
             try
             {
-                var usuarios = _cadastrarUsuarioHandler.Listar(usuarioDto);
+                var usuarios = _listarUsuariosHandler.Listar(usuarioDto);
                 return Ok(usuarios);
             }
             catch (Exception ex)

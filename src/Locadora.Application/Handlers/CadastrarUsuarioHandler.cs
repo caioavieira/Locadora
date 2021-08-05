@@ -51,17 +51,17 @@ namespace Locadora.Application.Handlers
             else
                 throw new ArgumentException(nameof(usuario.Tipo));
 
-            //if (!usuario.DocumentoValido())
-            //    throw new ArgumentException(nameof(usuario.Documento));
+            if (!usuario.DocumentoValido())
+               throw new ArgumentException(nameof(usuario.Documento));
 
-            //if (!usuario.EmailValido())
-            //    throw new ArgumentException(nameof(usuario.Email));
+            if (!usuario.EmailValido())
+               throw new ArgumentException(nameof(usuario.Email));
 
-            //if (!usuario.TelefoneValido())
-            //    throw new ArgumentException(nameof(usuario.Telefone));
+            if (!usuario.TelefoneValido())
+               throw new ArgumentException(nameof(usuario.Telefone));
 
-            //if (!endereco.CepValido())
-            //    throw new ArgumentException(nameof(endereco.Cep));
+            if (!endereco.CepValido())
+               throw new ArgumentException(nameof(endereco.Cep));
 
             using (var transacao = new Transacao(_locadoraContext))
             {    
@@ -70,24 +70,6 @@ namespace Locadora.Application.Handlers
             }
 
             return usuario.Id;
-        }
-        public IEnumerable<UsuarioDto> Listar(UsuarioDto usuarioDto)
-        {
-            var usuarios = _repositorioUsuario.Listar(usuarioDto.Nome, usuarioDto.Documento, usuarioDto.Tipo, usuarioDto.Email, usuarioDto.Senha, usuarioDto.Telefone, usuarioDto.DDD, usuarioDto.Debito, new Endereco()); 
-
-            return usuarios.ToList()
-                    .Select(usuario => new UsuarioDto
-                    {
-                        Id = usuario.Id,
-                        Nome = usuario.Nome,
-                        Documento = usuario.Documento,
-                        Tipo = usuario.Tipo,
-                        Email = usuario.Email,
-                        Senha = usuario.Senha,
-                        Telefone = usuario.Telefone,
-                        DDD = usuario.DDD,
-                        Debito = usuario.Debito
-                    });
         }
     }
 }

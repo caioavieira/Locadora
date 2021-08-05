@@ -33,6 +33,12 @@ namespace Locadora.Application.Extensoes
 
             servicos.AddScoped((serviceProvider) => 
             {
+                var repositorioUsuario = serviceProvider.GetRequiredService<IUsuarioRepository>();
+                return new ListarUsuariosHandler(repositorioUsuario);
+            });
+
+            servicos.AddScoped((serviceProvider) => 
+            {
                 var locadoraContext = serviceProvider.GetRequiredService<LocadoraContext>();
                 var repositorioAluguel = serviceProvider.GetRequiredService<IAluguelRepository>();
                 var repositorioProduto = serviceProvider.GetRequiredService<IProdutoRepository>();
