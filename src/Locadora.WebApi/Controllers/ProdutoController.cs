@@ -20,10 +20,11 @@ namespace Locadora.WebApi.Controllers
         private readonly CadastrarProdutoHandler _cadastrarProdutoHandler;
 
         public ProdutoController(ILogger<ProdutoController> logger,
-                                    ListarProdutosHandler listarProdutosHandler)
+                                    ListarProdutosHandler listarProdutosHandler,CadastrarProdutoHandler cadastrarProdutosHandler)
         {
             _logger = logger;
             _listarProdutosHandler = listarProdutosHandler;
+            _cadastrarProdutoHandler = cadastrarProdutosHandler;
         }
 
         [HttpGet]
@@ -44,6 +45,8 @@ namespace Locadora.WebApi.Controllers
         [HttpPost]
         public IActionResult CriarProduto(ProdutoDto produtoDto)
         {
+            return StatusCode(201);
+
             try
             {
                 var id = _cadastrarProdutoHandler.Criar(produtoDto);

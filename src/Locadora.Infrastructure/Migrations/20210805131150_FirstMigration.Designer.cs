@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Locadora.Infrastructure.Migrations
 {
     [DbContext(typeof(LocadoraContext))]
-    [Migration("20210805004550_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20210805131150_FirstMigration")]
+    partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -39,9 +39,6 @@ namespace Locadora.Infrastructure.Migrations
                     b.Property<int>("Prazo")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("ProdutoId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
@@ -52,8 +49,6 @@ namespace Locadora.Infrastructure.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ProdutoId");
 
                     b.HasIndex("UsuarioId");
 
@@ -98,6 +93,9 @@ namespace Locadora.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("AluguelId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("Categoria")
                         .HasColumnType("int");
 
@@ -117,6 +115,8 @@ namespace Locadora.Infrastructure.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AluguelId");
 
                     b.ToTable("Produtos");
                 });
@@ -183,17 +183,18 @@ namespace Locadora.Infrastructure.Migrations
 
             modelBuilder.Entity("Locadora.Domain.Entidades.Aluguel", b =>
                 {
-                    b.HasOne("Locadora.Domain.Entidades.Produto", "Produto")
-                        .WithMany()
-                        .HasForeignKey("ProdutoId");
-
                     b.HasOne("Locadora.Domain.Entidades.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId");
 
-                    b.Navigation("Produto");
-
                     b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("Locadora.Domain.Entidades.Produto", b =>
+                {
+                    b.HasOne("Locadora.Domain.Entidades.Aluguel", null)
+                        .WithMany("Produtos")
+                        .HasForeignKey("AluguelId");
                 });
 
             modelBuilder.Entity("Locadora.Domain.Entidades.Usuario", b =>
@@ -203,6 +204,11 @@ namespace Locadora.Infrastructure.Migrations
                         .HasForeignKey("EnderecoId");
 
                     b.Navigation("Endereco");
+                });
+
+            modelBuilder.Entity("Locadora.Domain.Entidades.Aluguel", b =>
+                {
+                    b.Navigation("Produtos");
                 });
 #pragma warning restore 612, 618
         }

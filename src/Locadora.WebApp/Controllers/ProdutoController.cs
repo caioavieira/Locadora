@@ -1,11 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using Locadora.Application.Dtos;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using System;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Threading.Tasks;
 
 namespace Locadora.WebApp.Controllers
 {
@@ -22,8 +21,14 @@ namespace Locadora.WebApp.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
+        [HttpGet()]
+        public IActionResult Index()
+        {
+            return View();
+        }
+
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] ProdutoDto produtoDto)
+        public async Task<IActionResult> Create([FromForm] ProdutoDto produtoDto) 
         {
             var httpClient = _httpClientFactory.CreateClient();
             var response = await httpClient.PostAsJsonAsync(_configuration.GetValue<string>("AppSettings:LocadoraApiUrl") + "/api/Produto", produtoDto);
@@ -62,10 +67,10 @@ namespace Locadora.WebApp.Controllers
         //}
 
         // GET: Usuarios/Create
-        public IActionResult Create()
-            {
-                return View();
-            }
+        // public IActionResult Create()
+        //     {
+        //         return View();
+        //     }
 
 
         //[HttpPost]

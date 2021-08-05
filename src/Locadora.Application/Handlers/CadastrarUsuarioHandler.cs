@@ -73,7 +73,7 @@ namespace Locadora.Application.Handlers
         }
         public IEnumerable<UsuarioDto> Listar(UsuarioDto usuarioDto)
         {
-            var usuarios = _repositorioUsuario.Listar(usuarioDto.Nome, usuarioDto.Documento, usuarioDto.Tipo, usuarioDto.Email, usuarioDto.Senha, usuarioDto.Telefone, usuarioDto.DDD, usuarioDto.Debito, new Endereco()); 
+            var usuarios = _repositorioUsuario.Listar(usuarioDto.Nome, usuarioDto.Documento, usuarioDto.Tipo, usuarioDto.Email, usuarioDto.Senha, usuarioDto.Telefone, usuarioDto.DDD, usuarioDto.Debito); 
 
             return usuarios.ToList()
                     .Select(usuario => new UsuarioDto

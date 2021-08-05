@@ -37,9 +37,6 @@ namespace Locadora.Infrastructure.Migrations
                     b.Property<int>("Prazo")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("ProdutoId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
@@ -182,34 +179,6 @@ namespace Locadora.Infrastructure.Migrations
                     b.HasDiscriminator().HasValue("Funcionario");
                 });
 
-            modelBuilder.Entity("Locadora.Domain.Entidades.Cliente", b =>
-                {
-                    b.HasBaseType("Locadora.Domain.Entidades.Usuario");
-
-                    b.HasDiscriminator().HasValue("Cliente");
-                });
-
-            modelBuilder.Entity("Locadora.Domain.Entidades.Funcionario", b =>
-                {
-                    b.HasBaseType("Locadora.Domain.Entidades.Usuario");
-
-                    b.HasDiscriminator().HasValue("Funcionario");
-                });
-
-            modelBuilder.Entity("Locadora.Domain.Entidades.Cliente", b =>
-                {
-                    b.HasBaseType("Locadora.Domain.Entidades.Usuario");
-
-                    b.HasDiscriminator().HasValue("Cliente");
-                });
-
-            modelBuilder.Entity("Locadora.Domain.Entidades.Funcionario", b =>
-                {
-                    b.HasBaseType("Locadora.Domain.Entidades.Usuario");
-
-                    b.HasDiscriminator().HasValue("Funcionario");
-                });
-
             modelBuilder.Entity("Locadora.Domain.Entidades.Aluguel", b =>
                 {
                     b.HasOne("Locadora.Domain.Entidades.Usuario", "Usuario")
@@ -234,12 +203,12 @@ namespace Locadora.Infrastructure.Migrations
 
                     b.Navigation("Endereco");
                 });
-#pragma warning restore 612, 618
 
             modelBuilder.Entity("Locadora.Domain.Entidades.Aluguel", b =>
                 {
                     b.Navigation("Produtos");
                 });
+#pragma warning restore 612, 618
         }
     }
 }
