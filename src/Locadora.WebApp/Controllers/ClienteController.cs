@@ -34,7 +34,7 @@ namespace Locadora.WebApp.Controllers
             if (!response.IsSuccessStatusCode)
                 throw new Exception(response.ReasonPhrase);
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Create));
         }
     }
 }
