@@ -16,7 +16,7 @@ namespace Locadora.Infrastructure.Repositorios
             _locadoraContext = locadoraContext;
         }
 
-        public Produto Obter(Guid id)
+        public Produto Obter(int id)
         {
             return _locadoraContext.Produtos.SingleOrDefault(s => s.Id == id);
         }

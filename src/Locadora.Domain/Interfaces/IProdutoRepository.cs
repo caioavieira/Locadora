@@ -7,7 +7,7 @@ namespace Locadora.Domain.Interfaces
 {
     public interface IProdutoRepository
     {
-        Produto Obter(Guid id);
+        Produto Obter(int id);
         void Adicionar(Produto produto);
         void Atualizar(Produto produto);
         void Remover(Produto produto);

@@ -5,7 +5,7 @@ namespace Locadora.Application.Dtos
 {
     public class ProdutoDto
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public MidiaProduto Midia { get; set; }
         public string Titulo { get; set; }
         public CategoriaProduto Categoria { get; set; }

@@ -19,9 +19,9 @@ namespace Locadora.Application.Handlers
             _repositorioProduto = repositorioProduto;
         }
 
-        public Guid Criar(ProdutoDto produtoDto)
+        public int Criar(ProdutoDto produtoDto)
         {
-            var produto = new Produto(Guid.NewGuid(), produtoDto.Midia, produtoDto.Titulo,produtoDto.Categoria,
+            var produto = new Produto(produtoDto.Id, produtoDto.Midia, produtoDto.Titulo,produtoDto.Categoria,
             produtoDto.Tipo, produtoDto.Valor, produtoDto.Quantidade);
    
                       

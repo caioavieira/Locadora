@@ -45,8 +45,6 @@ namespace Locadora.WebApi.Controllers
         [HttpPost]
         public IActionResult CriarProduto(ProdutoDto produtoDto)
         {
-            return StatusCode(201);
-
             try
             {
                 var id = _cadastrarProdutoHandler.Criar(produtoDto);
