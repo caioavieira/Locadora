@@ -10,11 +10,12 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Locadora.Infrastructure.Migrations
 {
     [DbContext(typeof(LocadoraContext))]
-    [Migration("20210803121142_firstMigration")]
-    partial class firstMigration
+    [Migration("20210805034236_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
+#pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.8")
@@ -35,6 +36,9 @@ namespace Locadora.Infrastructure.Migrations
                     b.Property<DateTime>("DataReserva")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("Prazo")
+                        .HasColumnType("int");
+
                     b.Property<Guid?>("ProdutoId")
                         .HasColumnType("uniqueidentifier");
 
@@ -47,16 +51,13 @@ namespace Locadora.Infrastructure.Migrations
                     b.Property<decimal>("Valor")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("prazo")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ProdutoId");
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("Aluguel");
+                    b.ToTable("Alugueis");
                 });
 
             modelBuilder.Entity("Locadora.Domain.Entidades.Endereco", b =>
@@ -77,9 +78,6 @@ namespace Locadora.Infrastructure.Migrations
                     b.Property<string>("Complemento")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Estado")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Logradouro")
                         .HasColumnType("nvarchar(max)");
 
@@ -91,7 +89,7 @@ namespace Locadora.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Endereco");
+                    b.ToTable("Enderecos");
                 });
 
             modelBuilder.Entity("Locadora.Domain.Entidades.Produto", b =>
@@ -109,6 +107,9 @@ namespace Locadora.Infrastructure.Migrations
                     b.Property<int>("Quantidade")
                         .HasColumnType("int");
 
+                    b.Property<int>("Tipo")
+                        .HasColumnType("int");
+
                     b.Property<string>("Titulo")
                         .HasColumnType("nvarchar(max)");
 
@@ -117,7 +118,7 @@ namespace Locadora.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Produto");
+                    b.ToTable("Produtos");
                 });
 
             modelBuilder.Entity("Locadora.Domain.Entidades.Usuario", b =>
@@ -128,6 +129,13 @@ namespace Locadora.Infrastructure.Migrations
 
                     b.Property<int>("DDD")
                         .HasColumnType("int");
+
+                    b.Property<bool>("Debito")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Documento")
                         .HasColumnType("nvarchar(max)");
@@ -144,8 +152,8 @@ namespace Locadora.Infrastructure.Migrations
                     b.Property<string>("Senha")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Telefone")
-                        .HasColumnType("int");
+                    b.Property<string>("Telefone")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Tipo")
                         .HasColumnType("int");
@@ -154,7 +162,23 @@ namespace Locadora.Infrastructure.Migrations
 
                     b.HasIndex("EnderecoId");
 
-                    b.ToTable("Usuario");
+                    b.ToTable("Usuarios");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Usuario");
+                });
+
+            modelBuilder.Entity("Locadora.Domain.Entidades.Cliente", b =>
+                {
+                    b.HasBaseType("Locadora.Domain.Entidades.Usuario");
+
+                    b.HasDiscriminator().HasValue("Cliente");
+                });
+
+            modelBuilder.Entity("Locadora.Domain.Entidades.Funcionario", b =>
+                {
+                    b.HasBaseType("Locadora.Domain.Entidades.Usuario");
+
+                    b.HasDiscriminator().HasValue("Funcionario");
                 });
 
             modelBuilder.Entity("Locadora.Domain.Entidades.Aluguel", b =>
@@ -180,6 +204,7 @@ namespace Locadora.Infrastructure.Migrations
 
                     b.Navigation("Endereco");
                 });
+#pragma warning restore 612, 618
         }
     }
 }

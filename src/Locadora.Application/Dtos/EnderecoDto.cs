@@ -1,7 +1,10 @@
+using System;
+
 namespace Locadora.Application.Dtos
 {
     public class EnderecoDto
     {
+        public Guid Id { get; set; }
         public string Logradouro { get; set; }
         public string Bairro { get; set; }
         public string Uf { get; set; }

@@ -1,0 +1,29 @@
+@model AluguelDto;
+
+@{
+    ViewData["Title"] = "Solicitação reserva";
+}
+
+<form asp-controller="SolicitacaoReserva" method="POST">
+    <div class="row">
+        <div class="col-4">
+            <div class="form-group">
+                <label>Prazo</label>
+                <input type="number" id="Prazo" name="Prazo" class="form-control">
+                <small class="form-text text-muted">Prazo mínimo de 2 dias.</small>
+            </div>
+        </div>
+    </div>
+    @foreach (var produto in ViewBag.Produtos)
+    {
+        <div class="row">
+            <div class="col-4">
+                <div class="form-check">
+                    <input type="checkbox" id="Produtos" name="Produtos" class="form-check-input" value="@produto.Id">
+                    <label class="form-check-label">@produto.Titulo</label>
+                </div>
+            </div>
+        </div>
+    }
+    <button type="submit" class="btn btn-primary">Solicitar</button>
+</form>
