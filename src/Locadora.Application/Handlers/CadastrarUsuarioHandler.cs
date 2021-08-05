@@ -35,7 +35,7 @@ namespace Locadora.Application.Handlers
                                         usuarioDto.DDD,
                                         false,
                                         endereco);
-            else
+            else if (usuario.Tipo == TipoUsuario.Funcionario)
                 usuario = new Funcionario(Guid.NewGuid(), 
                                             usuarioDto.Nome,
                                             usuarioDto.Documento,
@@ -46,6 +46,8 @@ namespace Locadora.Application.Handlers
                                             usuarioDto.DDD,
                                             false,
                                             endereco);
+            else
+                throw new ArgumentException(nameof(usuario.Tipo));
 
             //if (!usuario.DocumentoValido())
             //    throw new ArgumentException(nameof(usuario.Documento));

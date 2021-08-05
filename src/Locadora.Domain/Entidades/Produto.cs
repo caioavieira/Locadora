@@ -1,5 +1,6 @@
 ﻿using Locadora.Common.Enums;
 using System;
+using System.Collections.Generic;
 
 namespace Locadora.Domain.Entidades
 {
@@ -30,7 +31,7 @@ namespace Locadora.Domain.Entidades
 
         public bool PermitidoAluguel()
         {
-            throw new NotImplementedException();
+            return Quantidade > 0;
         }
     }
 }

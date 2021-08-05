@@ -1,5 +1,6 @@
 using Locadora.Common.Enums;
 using System;
+using System.Collections.Generic;
 
 namespace Locadora.Domain.Entidades
 {
@@ -13,13 +14,14 @@ namespace Locadora.Domain.Entidades
         public StatusAluguel Status { get; set; }
         public int Prazo { get; set; }
         public Usuario Usuario { get; set; }
-        public Produto Produto { get; set; }
+        public IEnumerable<Produto> Produtos { get; set; }
 
         public Aluguel()
         {
+            Produtos = new List<Produto>();
         }
 
-        public Aluguel(Guid id, DateTime dataAluguel, DateTime dataEntrega, DateTime dataReserva, decimal valor, StatusAluguel status, int prazo, Usuario usuario, Produto produto)
+        public Aluguel(Guid id, DateTime dataAluguel, DateTime dataEntrega, DateTime dataReserva, decimal valor, StatusAluguel status, int prazo, Usuario usuario, IEnumerable<Produto> produtos)
         {
             Id = id;
             DataAluguel = dataAluguel;
@@ -29,10 +31,15 @@ namespace Locadora.Domain.Entidades
             Status = status;
             Prazo = prazo;
             Usuario = usuario;
-            Produto = produto;
+            Produtos = produtos;
         }
 
-        public decimal CalcularValor()
+        public bool PrazoValido()
+        {
+            return Prazo >= 2;
+        }
+
+        public bool SolicitacaoConfirmada()
         {
             throw new NotImplementedException();
         }
@@ -42,7 +49,7 @@ namespace Locadora.Domain.Entidades
             throw new NotImplementedException();
         }
 
-        public bool SolicitacaoConfirmada()
+        public decimal CalcularValor()
         {
             throw new NotImplementedException();
         }
