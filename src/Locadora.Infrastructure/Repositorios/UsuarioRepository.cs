@@ -3,6 +3,7 @@ using Locadora.Domain.Entidades;
 using Locadora.Domain.Interfaces;
 using Locadora.Infrastructure.Contextos;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Locadora.Infrastructure.Repositorios
@@ -41,5 +42,10 @@ namespace Locadora.Infrastructure.Repositorios
             return _locadoraContext.Usuarios.Where(w => 
                                                         (string.IsNullOrWhiteSpace(nome) || w.Nome.ToLower().Contains(nome.ToLower())));
         }
+        public IEnumerable<Usuario> ObterTodos()
+        {
+            return _locadoraContext.Usuarios.ToList();
+        }
+
     }
 }

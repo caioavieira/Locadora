@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace Locadora.WebApi.Controllers
 {
@@ -37,6 +38,21 @@ namespace Locadora.WebApi.Controllers
                 return BadRequest(ex.Message + " inválido(a)");
             }
             catch(Exception ex)
+            {
+                _logger.LogError(ex.Message, ex);
+                return StatusCode(500, "Erro ao executar ação");
+            }
+        }
+
+        [HttpGet]
+        public IActionResult ListarUsuario([FromQuery] UsuarioDto usuarioDto)
+        {
+            try
+            {
+                var usuarios = _cadastrarUsuarioHandler.ObterTodos();
+                return Ok(usuarios);
+            }
+            catch (Exception ex)
             {
                 _logger.LogError(ex.Message, ex);
                 return StatusCode(500, "Erro ao executar ação");
