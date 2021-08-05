@@ -6,7 +6,7 @@ namespace Locadora.Domain.Entidades
 {
     public class Produto
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public MidiaProduto Midia { get; set; }
         public string Titulo { get; set; }
         public CategoriaProduto Categoria { get; set; }
@@ -18,7 +18,7 @@ namespace Locadora.Domain.Entidades
         {            
         }
 
-        public Produto(Guid id, MidiaProduto midia, string titulo, CategoriaProduto categoria, TipoProduto tipo, decimal valor, int quantidade)
+        public Produto(int id, MidiaProduto midia, string titulo, CategoriaProduto categoria, TipoProduto tipo, decimal valor, int quantidade)
         {
             Id = id;
             Midia = midia;
