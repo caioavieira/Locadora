@@ -47,18 +47,18 @@ namespace Locadora.Application.Handlers
                                             false,
                                             endereco);
 
-            if (!usuario.DocumentoValido())
-                throw new ArgumentException(nameof(usuario.Documento));
+            //if (!usuario.DocumentoValido())
+            //    throw new ArgumentException(nameof(usuario.Documento));
 
-            if (!usuario.EmailValido())
-                throw new ArgumentException(nameof(usuario.Email));
+            //if (!usuario.EmailValido())
+            //    throw new ArgumentException(nameof(usuario.Email));
 
-            if (!usuario.TelefoneValido())
-                throw new ArgumentException(nameof(usuario.Telefone));
+            //if (!usuario.TelefoneValido())
+            //    throw new ArgumentException(nameof(usuario.Telefone));
 
-            if (!endereco.CepValido())
-                throw new ArgumentException(nameof(endereco.Cep));
-                      
+            //if (!endereco.CepValido())
+            //    throw new ArgumentException(nameof(endereco.Cep));
+
             using (var transacao = new Transacao(_locadoraContext))
             {    
                 _repositorioUsuario.Adicionar(usuario);            
