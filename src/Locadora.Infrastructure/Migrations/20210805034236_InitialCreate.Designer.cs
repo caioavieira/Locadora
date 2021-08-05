@@ -4,14 +4,16 @@ using Locadora.Infrastructure.Contextos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Locadora.Infrastructure.Migrations
 {
     [DbContext(typeof(LocadoraContext))]
-    partial class LocadoraContextModelSnapshot : ModelSnapshot
+    [Migration("20210805034236_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,6 +52,8 @@ namespace Locadora.Infrastructure.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProdutoId");
 
                     b.HasIndex("UsuarioId");
 
@@ -94,9 +98,6 @@ namespace Locadora.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("AluguelId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int>("Categoria")
                         .HasColumnType("int");
 
@@ -116,8 +117,6 @@ namespace Locadora.Infrastructure.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AluguelId");
 
                     b.ToTable("Produtos");
                 });
@@ -182,34 +181,19 @@ namespace Locadora.Infrastructure.Migrations
                     b.HasDiscriminator().HasValue("Funcionario");
                 });
 
-            modelBuilder.Entity("Locadora.Domain.Entidades.Cliente", b =>
-                {
-                    b.HasBaseType("Locadora.Domain.Entidades.Usuario");
-
-                    b.HasDiscriminator().HasValue("Cliente");
-                });
-
-            modelBuilder.Entity("Locadora.Domain.Entidades.Funcionario", b =>
-                {
-                    b.HasBaseType("Locadora.Domain.Entidades.Usuario");
-
-                    b.HasDiscriminator().HasValue("Funcionario");
-                });
-
             modelBuilder.Entity("Locadora.Domain.Entidades.Aluguel", b =>
                 {
+                    b.HasOne("Locadora.Domain.Entidades.Produto", "Produto")
+                        .WithMany()
+                        .HasForeignKey("ProdutoId");
+
                     b.HasOne("Locadora.Domain.Entidades.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId");
 
-                    b.Navigation("Usuario");
-                });
+                    b.Navigation("Produto");
 
-            modelBuilder.Entity("Locadora.Domain.Entidades.Produto", b =>
-                {
-                    b.HasOne("Locadora.Domain.Entidades.Aluguel", null)
-                        .WithMany("Produtos")
-                        .HasForeignKey("AluguelId");
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("Locadora.Domain.Entidades.Usuario", b =>
@@ -220,11 +204,7 @@ namespace Locadora.Infrastructure.Migrations
 
                     b.Navigation("Endereco");
                 });
-
-            modelBuilder.Entity("Locadora.Domain.Entidades.Aluguel", b =>
-                {
-                    b.Navigation("Produtos");
-                });
+#pragma warning restore 612, 618
         }
     }
 }
