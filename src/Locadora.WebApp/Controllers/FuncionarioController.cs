@@ -11,8 +11,6 @@ namespace Locadora.WebApp.Controllers
 {
     public class FuncionarioController : Controller
     {
-        //private readonly ILogger<FuncionarioController> _logger;
-        //private readonly CadastrarUsuarioHandler _cadastrarUsuarioHandler;
         private readonly IConfiguration _configuration;
         private readonly IHttpClientFactory _httpClientFactory;
 
@@ -21,8 +19,6 @@ namespace Locadora.WebApp.Controllers
         {
             _configuration = configuration;
             _httpClientFactory = httpClientFactory;
-            //_logger = logger;
-            //_cadastrarUsuarioHandler = cadastrarUsuarioHandler;
         }
 
         [HttpPost]
@@ -44,7 +40,9 @@ namespace Locadora.WebApp.Controllers
         {
             var httpClient = _httpClientFactory.CreateClient();
             var response = await httpClient.GetFromJsonAsync(_configuration.GetValue<string>("AppSettings:LocadoraApiUrl") + "/api/Usuario", typeof(IEnumerable<UsuarioDto>));
-            return View(response);
+            IEnumerable<UsuarioDto> funcionarios = (IEnumerable<UsuarioDto>)response;
+
+            return View(funcionarios);
         }
 
         // GET: Usuarios/Details/5

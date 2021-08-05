@@ -6,6 +6,7 @@ using Locadora.Infrastructure.Contextos;
 using Locadora.Infrastructure.Transacoes;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Locadora.Application.Handlers
 {
@@ -68,9 +69,23 @@ namespace Locadora.Application.Handlers
 
             return usuario.Id;
         }
-        public IEnumerator<UsuarioDto> ObterTodos()
+        public IEnumerable<UsuarioDto> Listar(UsuarioDto usuarioDto)
         {
-            return _repositorioUsuario.ObterTodos();
+            var usuarios = _repositorioUsuario.Listar(usuarioDto.Nome, usuarioDto.Documento, usuarioDto.Tipo, usuarioDto.Email, usuarioDto.Senha, usuarioDto.Telefone, usuarioDto.DDD, usuarioDto.Debito, new Endereco()); 
+
+            return usuarios.ToList()
+                    .Select(usuario => new UsuarioDto
+                    {
+                        Id = usuario.Id,
+                        Nome = usuario.Nome,
+                        Documento = usuario.Documento,
+                        Tipo = usuario.Tipo,
+                        Email = usuario.Email,
+                        Senha = usuario.Senha,
+                        Telefone = usuario.Telefone,
+                        DDD = usuario.DDD,
+                        Debito = usuario.Debito
+                    });
         }
     }
 }

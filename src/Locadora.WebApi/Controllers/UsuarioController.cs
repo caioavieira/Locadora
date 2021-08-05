@@ -49,7 +49,7 @@ namespace Locadora.WebApi.Controllers
         {
             try
             {
-                var usuarios = _cadastrarUsuarioHandler.ObterTodos();
+                var usuarios = _cadastrarUsuarioHandler.Listar(usuarioDto);
                 return Ok(usuarios);
             }
             catch (Exception ex)
