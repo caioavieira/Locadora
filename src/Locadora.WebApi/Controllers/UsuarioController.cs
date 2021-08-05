@@ -43,5 +43,20 @@ namespace Locadora.WebApi.Controllers
                 return StatusCode(500, "Erro ao executar ação");
             }
         }
+
+        [HttpGet]
+        public IActionResult ListarUsuario([FromQuery] UsuarioDto usuarioDto)
+        {
+            try
+            {
+                var usuarios = _cadastrarUsuarioHandler.Listar(usuarioDto);
+                return Ok(usuarios);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message, ex);
+                return StatusCode(500, "Erro ao executar ação");
+            }
+        }
     }
 }

@@ -1,6 +1,7 @@
 using Locadora.Common.Enums;
 using Locadora.Domain.Entidades;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Locadora.Domain.Interfaces
