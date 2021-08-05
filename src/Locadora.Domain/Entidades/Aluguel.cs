@@ -41,17 +41,41 @@ namespace Locadora.Domain.Entidades
 
         public bool SolicitacaoConfirmada()
         {
-            throw new NotImplementedException();
-        }
-
-        public bool PrazoExpirado()
-        {
-            throw new NotImplementedException();
+            return Status == StatusAluguel.ReservaConcluida;
         }
 
         public decimal CalcularValor()
         {
-            throw new NotImplementedException();
+            var valor = 0M;
+
+            foreach (var produto in Produtos)
+            {
+                var multa = 0M;
+
+                if (PrazoExpirado()) {
+                    if (produto.Tipo == TipoProduto.Jogo)
+                        multa = produto.Valor;
+                    else if (produto.Midia == MidiaProduto.BluRay)
+                        multa = produto.Valor * 0.5M;
+                    else if (produto.Midia == MidiaProduto.CD)
+                        multa = produto.Valor * 0.3M;
+                    else if (produto.Midia == MidiaProduto.DVD)
+                        multa = produto.Valor * 0.4M;
+                    else if (produto.Midia == MidiaProduto.VHS)
+                        multa = produto.Valor * 0.2M;
+                }
+
+                valor += produto.Valor + multa;
+            }
+
+            Valor = valor;
+
+            return Valor;
+        }
+
+        private bool PrazoExpirado()
+        {
+            return (DataReserva.Date - DataAluguel.Date).Days > 7;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 
 namespace Locadora.Domain.Entidades
 {
@@ -31,7 +32,8 @@ namespace Locadora.Domain.Entidades
 
         public bool CepValido()
         {
-            throw new NotImplementedException();
+            var rgx = new Regex(@"^\d{5}-\d{3}$");
+            return rgx.IsMatch(Cep);
         }
     }
 }
