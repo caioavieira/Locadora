@@ -21,14 +21,8 @@ namespace Locadora.Application.Handlers
 
         public Guid Criar(ProdutoDto produtoDto)
         {
-            var produto = new Produto();
-            produto.Id = Guid.NewGuid();
-            produto.Midia = produtoDto.Midia;
-            produto.Titulo =    produtoDto.Titulo;
-            produto.Categoria =    produtoDto.Categoria;
-            produto.Tipo =    produtoDto.Tipo;
-            produto.Valor =   produtoDto.Valor;
-            produto.Quantidade =    produtoDto.Quantidade;
+            var produto = new Produto(Guid.NewGuid(), produtoDto.Midia, produtoDto.Titulo,produtoDto.Categoria,
+            produtoDto.Tipo, produtoDto.Valor, produtoDto.Quantidade,);
    
                       
             using (var transacao = new Transacao(_locadoraContext))
