@@ -45,6 +45,13 @@ namespace Locadora.Application.Extensoes
                 var repositorioProduto = serviceProvider.GetRequiredService<IProdutoRepository>();
                 return new ListarProdutosHandler(repositorioProduto);
             });
+            
+            servicos.AddScoped((serviceProvider) => 
+            {
+                var locadoraContext = serviceProvider.GetRequiredService<LocadoraContext>();
+                var produtoRepository = serviceProvider.GetRequiredService<IProdutoRepository>();
+                return new CadastrarProdutoHandler(locadoraContext, produtoRepository);
+            });
         }
     }
 }
