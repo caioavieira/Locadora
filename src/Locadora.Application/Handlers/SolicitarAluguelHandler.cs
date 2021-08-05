@@ -1,9 +1,13 @@
 using Locadora.Application.Dtos;
+using Locadora.Application.Exceptions;
+using Locadora.Common.Enums;
 using Locadora.Domain.Entidades;
 using Locadora.Domain.Interfaces;
 using Locadora.Infrastructure.Contextos;
 using Locadora.Infrastructure.Transacoes;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Locadora.Application.Handlers
 {
@@ -27,9 +31,32 @@ namespace Locadora.Application.Handlers
 
         public Guid Solicitar(AluguelDto aluguelDto)
         {
+            var produtos = new List<Produto>();
             var usuario = _repositorioUsuario.Obter(aluguelDto.Usuario.Id);
-            var produto = _repositorioProduto.Obter(aluguelDto.Produto.Id);
-            var aluguel = new Aluguel(Guid.NewGuid(), aluguelDto.DataAluguel, aluguelDto.DataEntrega, aluguelDto.DataReserva, aluguelDto.Valor, aluguelDto.Status, aluguelDto.Prazo, usuario, produto);
+
+            if (usuario == null)
+                throw new ArgumentException(nameof(aluguelDto.Usuario));
+
+            if (aluguelDto.Produtos.Count() == 0)
+                throw new ArgumentException(nameof(aluguelDto.Produtos));
+
+            if (usuario.Debito)
+                throw new UsuarioComDebitoPendenteException(usuario.Nome);
+
+            foreach (var produtoDto in aluguelDto.Produtos)
+            {
+                var produto = _repositorioProduto.Obter(produtoDto.Id);
+
+                if (usuario == null)
+                    throw new ArgumentException(nameof(produtoDto));
+
+                if (!produto.PermitidoAluguel())
+                    throw new AluguelNaoPermitidoException(produto.Titulo);
+
+                produtos.Add(produto);
+            }
+
+            var aluguel = new Aluguel(Guid.NewGuid(), DateTime.Now, aluguelDto.DataEntrega, aluguelDto.DataReserva, aluguelDto.Valor, StatusAluguel.SolicitacaoPendente, aluguelDto.Prazo, usuario, produtos);
 
             if (!aluguel.PrazoValido())
                 throw new ArgumentException(nameof(aluguel.Prazo));

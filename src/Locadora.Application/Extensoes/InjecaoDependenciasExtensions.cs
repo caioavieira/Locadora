@@ -39,6 +39,12 @@ namespace Locadora.Application.Extensoes
                 var repositorioUsuario = serviceProvider.GetRequiredService<IUsuarioRepository>();
                 return new SolicitarAluguelHandler(locadoraContext, repositorioAluguel, repositorioProduto, repositorioUsuario);
             });
+
+            servicos.AddScoped((serviceProvider) => 
+            {
+                var repositorioProduto = serviceProvider.GetRequiredService<IProdutoRepository>();
+                return new ListarProdutosHandler(repositorioProduto);
+            });
         }
     }
 }

@@ -1,4 +1,5 @@
 using Locadora.Application.Dtos;
+using Locadora.Application.Exceptions;
 using Locadora.Application.Handlers;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace Locadora.WebApi.Controllers
 {
@@ -35,6 +37,16 @@ namespace Locadora.WebApi.Controllers
             {
                 _logger.LogError(ex.Message, ex);
                 return BadRequest(ex.Message + " inválido(a)");
+            }
+            catch (AluguelNaoPermitidoException ex)
+            {
+                _logger.LogError(ex.Message, ex);
+                return UnprocessableEntity(ex.Message);
+            }
+            catch (UsuarioComDebitoPendenteException ex)
+            {
+                _logger.LogError(ex.Message, ex);
+                return UnprocessableEntity(ex.Message);
             }
             catch (Exception ex)
             {

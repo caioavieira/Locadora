@@ -30,7 +30,7 @@ namespace Locadora.Domain.Entidades
 
         public bool PermitidoAluguel()
         {
-            throw new NotImplementedException();
+            return Quantidade > 0;
         }
     }
 }

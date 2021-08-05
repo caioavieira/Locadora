@@ -1,5 +1,6 @@
 using Locadora.Common.Enums;
 using System;
+using System.Collections.Generic;
 
 namespace Locadora.Application.Dtos
 {
@@ -13,6 +14,6 @@ namespace Locadora.Application.Dtos
         public StatusAluguel Status { get; set; }
         public int Prazo { get; set; }
         public UsuarioDto Usuario { get; set; }
-        public ProdutoDto Produto { get; set; }
+        public IEnumerable<ProdutoDto> Produtos { get; set; }
     }
 }
