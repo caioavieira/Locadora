@@ -25,3 +25,23 @@ Repositório de uma aplicação Web para simular um serviço de aluguel de filme
 ## :floppy_disk: Clonar Repositório
 
 `git clone https://github.com/caioavieira/Locadora.git`
+
+## :arrows_counterclockwise: Instalação
+
+Dentro da pasta  `Locadora\src` aplicar as seguintes instruções nas camadas da aplicação:
+
+### Locadora.Infrastructure
+    - Atualizar a string de conexão dentro da pasta LocadoraContextFactory.cs para a string que você irá conectar
+    - Executar o comando dotnet ef database update
+    
+### Locadora.Webapi
+    - Alterar a string de conexão no arquivo appsettings.json para a string que você irá conectar
+
+### Locadora.WebApp
+    - Definir dentro do arquivo appsetting.json a key 'LocadoraApiUrl' para url da webapi
+    - Modificar a string de conexão no arquivo Startup.cs para a string que você irá conectar
+
+### Locadora.Worker
+    - Mudar dentro do arquivo appsetting.json a key 'LocadoraApiUrl' para url da webapi
+    - Alterar a string de conexão no arquivo Program.cs para a string que você irá conectar
+    
