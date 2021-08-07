@@ -18,8 +18,8 @@ Com o cliente executando a devolução do item que solicitou o aluguel essa conf
 - [Caio Vieira](https://github.com/caioavieira)
 - [Paulo Alves](https://github.com/PauloAlves8039)
 - [Jessica Magalhães](https://github.com/jessicaemg)
-- [Mateus Ferreira](https://github.com/jessicaemg)
-- [Luiz Fernando](https://github.com/caioavieira/Locadora)
+- [Mateus Ferreira](https://github.com/mfladeira)
+- [Luiz Fernando](https://github.com/LFernando994)
 
 ## :wrench: Recursos Utilizados
 
