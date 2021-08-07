@@ -2,7 +2,16 @@
 
 ## :computer: Projeto
 
-Repositório de uma aplicação Web para simular um serviço de aluguel de filmes, projeto proposto como atividade final do treinamento .NET C# do Localiza Labs!
+Repositório de uma aplicação Web para simular um serviço de aluguel de filmes, projeto proposto como atividade final do treinamento .NET C# do Localiza Labs.
+
+Nessa aplicação o cliente vai dispor de recursos para solicitar um cadastro que lhe permite acesso a uma área de solicitação de reservar de itens, com isso será possível escolher um prazo de locação de 2 dias a 1 semana.
+
+Com o cliente executando a devolução do item que solicitou o aluguel essa confirmação é feita pelo funcionário, que vai poder ter acesso a uma área responsável pela baixa da locação.
+
+
+## :camera: Diagrama do Banco de Dados
+
+<p align="center"> <img src="https://github.com/caioavieira/Locadora/blob/master/src/Locadora.WebApp/wwwroot/images/diagrama-locadora.png" /></p>
 
 ## :ballot_box_with_check: Desenvolvedores
 
